@@ -4,18 +4,18 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import es.fpsumma.dam2.utilidades.model.Tarea
+import es.fpsumma.dam2.utilidades.model.Asignatura
 
 // Esto le dice a Room: “esta es mi base de datos”
 // - entities: qué tablas tendrá (aquí, la tabla Tarea)
 // - version: versión del esquema (si cambias campos/tabla, suele subir)
 // - exportSchema=false: no guarda el “historial” del esquema en archivos
-@Database(entities = [Tarea::class], version = 1, exportSchema = false)
+@Database(entities = [Asignatura::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     // Room necesita que le digamos qué DAO vamos a usar para acceder a la BD
     // (el DAO contiene métodos como insertar, borrar, consultar, etc.)
-    abstract fun tareaDao(): TareaDao
+    abstract fun asignaturaDao(): AsignaturaDao
 
     companion object {
         // Guardamos aquí la única instancia de la BD (para no crear 20 bases de datos)

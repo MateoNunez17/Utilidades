@@ -5,7 +5,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.room.Room
 import es.fpsumma.dam2.utilidades.data.local.AppDatabase
-import es.fpsumma.dam2.utilidades.model.Tarea
+import es.fpsumma.dam2.utilidades.model.Asignatura
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
@@ -19,24 +19,24 @@ class TareasViewModel(app: Application) : AndroidViewModel(app) {
     ).fallbackToDestructiveMigration(false).build()
 
     // 2) El DAO es quien hace las operaciones con la base de datos (guardar, borrar, leer...)
-    private val dao = db.tareaDao()
+    private val dao = db.asignaturaDao()
 
     // 3) Lista de tareas “observable”: cuando la BD cambia, esto se actualiza y la UI se entera
-    val tareas: StateFlow<List<Tarea>> =
-        dao.getAllTareas().stateIn(
+    val asignaturas: StateFlow<List<Asignatura>> =
+        dao.getAllAsignatura().stateIn(
             viewModelScope,              // se ejecuta mientras exista el ViewModel
             SharingStarted.Lazily,       // empieza cuando alguien lo está viendo
             emptyList()                  // valor inicial (al principio no hay nada)
         )
 
-    // 4) Añadir una tarea (se hace en segundo plano para no bloquear la app)
-    fun addTarea(titulo: String, descripcion: String) = viewModelScope.launch {
-        dao.insert(Tarea(titulo = titulo, descripcion = descripcion))
+    // 4) Añadir una asignatura (se hace en segundo plano para no bloquear la app)
+    fun addAsignatura(titulo: String, nota: Int) = viewModelScope.launch {
+        dao.insert(Asignatura(titulo = titulo, nota = nota))
     }
 
-    // 5) Borrar una tarea (también en segundo plano)
-    fun deleteTarea(tarea: Tarea) = viewModelScope.launch {
-        dao.delete(tarea)
+    // 5) Borrar una asignatura (también en segundo plano)
+    fun deleteAsigantura(asignatura: Asignatura) = viewModelScope.launch {
+        dao.delete(asignatura)
     }
 
 }
