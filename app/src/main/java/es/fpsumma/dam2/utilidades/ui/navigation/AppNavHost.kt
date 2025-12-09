@@ -11,7 +11,7 @@ import es.fpsumma.dam2.utilidades.ui.viewmodel.TareasViewModel
 @Composable
 fun AppNavHost(navController: NavHostController, tareasViewModel: TareasViewModel) {
     NavHost(navController = navController, startDestination = Routes.HOME) {
-        composable(Routes.HOME) { HomeScreen(navController)}
+        composable(Routes.HOME) { HomeScreen(navController, vm = tareasViewModel)}
         composable(Routes.LISTADO_TAREAS) { ListadoTareasScreen(navController,tareasViewModel) }
 
     }

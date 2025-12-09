@@ -13,7 +13,7 @@ import es.fpsumma.dam2.utilidades.ui.viewmodel.TareasViewModel
 
 
 class MainActivity : ComponentActivity() {
-
+    // ...
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -26,8 +26,9 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun MyApp() {
     val navController = rememberNavController()
+    // ✅ CORRECTO: Inyección del ViewModel (solución al crash de inyección)
     val tareasViewModel: TareasViewModel =viewModel()
-    UtilidadesTheme {
+    UtilidadesTheme { // Asumiendo que UtilidadesTheme existe
         AppNavHost(navController = navController, tareasViewModel)
     }
 }
